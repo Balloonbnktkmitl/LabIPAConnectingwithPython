@@ -1,9 +1,13 @@
 import pexpect
+import getpass
+import os
 
 PROMPT = '#'
 IP = "172.31.103.3"
-USERNAME = "admin"
-PASSWORD = "cisco"
+# USERNAME = "admin"
+# PASSWORD = "cisco"
+USERNAME = os.environ.get('TELNET_USER')
+PASSWORD = os.environ.get('TELNET_PASSWORD')
 COMMANDIP ="ip address 172.16.1.1 255.255.255.255"
 
 try:
