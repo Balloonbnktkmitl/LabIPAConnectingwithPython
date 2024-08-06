@@ -10,6 +10,7 @@ USERNAME = os.environ.get('TELNET_USER')
 PASSWORD = os.environ.get('TELNET_PASSWORD')
 COMMAND = [
     "configure terminal",
+    "vrf forwarding control-data",
     "interface Loopback0",
     "ip address 172.16.2.2 255.255.255.255",
     "exit",

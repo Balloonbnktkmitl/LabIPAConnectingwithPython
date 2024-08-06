@@ -24,6 +24,8 @@ child.sendline('conf t')
 child.expect("\(config\)" + PROMPT)
 child.sendline('int loopback 0')
 child.expect("\(config-if\)" + PROMPT)
+child.sendline("vrf forwarding control-data")
+child.expect("\(config-if\)" + PROMPT)
 child.sendline(COMMANDIP)
 
 print("Loopback interface created with IP address")
