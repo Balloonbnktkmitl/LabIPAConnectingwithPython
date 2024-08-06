@@ -4,29 +4,24 @@ PROMPT = '#'
 IP = "172.31.103.3"
 USERNAME = "admin"
 PASSWORD = "cisco"
-COMMAND = [
-    "configure terminal",
-    "interface Loopback0",
-    "ip address 172.16.1.1 255.255.255.255",
-    "exit",
-    "exit"
-]
+COMMANDIP ="ip address 172.16.1.1 255.255.255.255"
 
-child = pexpect.spawn("telnet" + IP)
-child.expect('Username')
-child.sendline(USERNAME)
-child.expect('Password')
-child.sendline(PASSWORD)
-
-child.expect(PROMPT)
-
-for command in COMMAND:
-    child.sendline(command)
+try:
+    child = pexpect.spawn("telnet " + IP)
+    child.expect('Username')
+    child.sendline(USERNAME)
+    child.expect('Password')
+    child.sendline(PASSWORD)
     child.expect(PROMPT)
+except:
+    print("Telnet failed")
     
-result = child.before
-print(result)
-print()
-print(result.decode("UTF-8"))
+child.sendline('conf t')
+child.expect("\(config\)" + PROMPT)
+child.sendline('int loopback 0')
+child.expect("\(config-if\)" + PROMPT)
+child.sendline(COMMANDIP)
+
+print("Loopback interface created with IP address")
 
 child.sendline('exit')
