@@ -1,9 +1,13 @@
 import pexpect
+import getpass
+import os
 
 PROMPT = '#'
 IP = "172.31.103.4"
-USERNAME = "admin"
-PASSWORD = "cisco"
+# USERNAME = "admin"
+# PASSWORD = "cisco"
+USERNAME = os.environ.get('TELNET_USER')
+PASSWORD = os.environ.get('TELNET_PASSWORD')
 COMMAND = [
     "configure terminal",
     "interface Loopback0",
