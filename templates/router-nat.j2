@@ -3,7 +3,9 @@
     access-list {{ acl.number }} {{ rule.action }} {{ rule.src }} {{ rule.src_mask }}
 {% endfor %}
 {% endfor %}
-ip nat inside source list 1 interface {{ nat.outside }} vrf {{ nat.vrf }} overload
+{% for outside in nat.outside %}
+ip nat inside source list 1 interface {{ outside }} vrf {{ nat.vrf }} overload
+{% endfor %} 
 
 {% for inside in nat.inside %}
 interface {{ inside }}
