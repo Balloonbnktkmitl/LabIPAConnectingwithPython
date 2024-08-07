@@ -10,5 +10,7 @@ interface {{ inside }}
   ip nat inside
 {% endfor %}
 
-interface {{ nat.outside }}
+{% for outside in nat.outside %}
+interface {{ outside }}
   ip nat outside
+{% endfor %} 
